@@ -28,7 +28,11 @@ const Dropdown = (props) => {
         onChange={(e) => setCurrentState(e.target.value)}
       >
         {list.map((item) => {
-          return <MenuItem value={item}>{item}</MenuItem>;
+          return (
+            <MenuItem key={item} value={item}>
+              {item}
+            </MenuItem>
+          );
         })}
       </Select>
     </FormControl>

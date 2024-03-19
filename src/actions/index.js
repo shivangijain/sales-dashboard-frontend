@@ -7,7 +7,6 @@ export const getStateList = async () => {
       throw new Error("Failed to fetch data");
     }
     const jsonData = await response.json();
-    console.log(response.ok);
     return jsonData;
   } catch (error) {
     console.log(error.message);

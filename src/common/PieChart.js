@@ -25,7 +25,9 @@ const DoughnutChart = (props) => {
   const chartOptions = {
     tooltip: {
       trigger: "item",
-      formatter: "{a} <br/>{b}: {c} ({d}%)",
+      formatter: function (params) {
+        return `${params.name}: ${params.percent}%`;
+      },
     },
     legend: {
       orient: "horizontal",

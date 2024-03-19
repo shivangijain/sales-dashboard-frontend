@@ -130,7 +130,6 @@ exports.segmentSalesChartData = (items) => {
 };
 
 const sortedBySales = (items) => {
-  console.log(Object.entries(items));
   let sortedItems = Object.entries(items).sort(
     (a, b) => b[1].sales - a[1].sales
   );

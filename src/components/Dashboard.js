@@ -11,16 +11,26 @@ import SalesChart from "./SalesChart";
 import { useEffect, useState } from "react";
 import { getDashboardData, getStateList } from "../actions";
 
-const useStyles = makeStyles((theme) => ({
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    marginLeft: 240,
-  },
-}));
+const useStyles = makeStyles((theme) => {
+  return {
+    content: {
+      flex: 1,
+      padding: theme.spacing(3),
+    },
+    drawerOpen: {
+      transition: "margin-left 0.3s ease",
+      marginLeft: 260,
+    },
+    drawerClose: {
+      transition: "margin-left 0.3s ease",
+      marginLeft: 0,
+    },
+  };
+});
 
-const Dashboard = () => {
-  const classes = useStyles();
+const Dashboard = ({ isDrawerOpen }) => {
+  const classes = useStyles({ isDrawerOpen });
+
   const [stateList, setStateList] = useState(null);
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
@@ -49,6 +59,7 @@ const Dashboard = () => {
   };
 
   const fetchData = async () => {
+    if (!(currentState && fromDate && toDate)) return;
     const data = await getDashboardData(currentState, fromDate, toDate);
     setDashboardData(data);
     setSales(data.totalSales);
@@ -79,8 +90,13 @@ const Dashboard = () => {
 
   if (!stateList) return <h1>Loading...</h1>;
   return (
-    <main className={classes.content}>
+    <main
+      className={`${classes.content} ${
+        isDrawerOpen ? classes.drawerOpen : classes.drawerClose
+      }`}
+    >
       <Toolbar />
+
       <Grid container spacing={3}>
         <Topbar
           states={stateList}
@@ -91,10 +107,14 @@ const Dashboard = () => {
           setToDate={(date) => setToDate(date)}
           setCurrentState={(state) => setCurrentState(state)}
         />
-        <StatsCard stats={getStatData(sales, discount, profit, quantity)} />
         {dashboardData && dashboardData.items.length > 0 && (
-          <SalesChart dashboardData={dashboardData} />
+          <>
+            <StatsCard stats={getStatData(sales, discount, profit, quantity)} />
+            <SalesChart dashboardData={dashboardData} />
+          </>
         )}
+        {/* {dashboardData && dashboardData.items.length > 0 && (
+          )} */}
       </Grid>
     </main>
   );

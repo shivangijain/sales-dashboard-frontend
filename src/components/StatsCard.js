@@ -8,7 +8,7 @@ const StatsCard = (props) => {
       <Grid container spacing={2}>
         {stats.map((stat) => {
           return (
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={6} sm={3} key={stat.title}>
               <Card {...stat} />
             </Grid>
           );

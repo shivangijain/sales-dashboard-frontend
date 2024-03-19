@@ -14,11 +14,15 @@ const LandingPage = (props) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const classes = useStyles();
 
+  const handleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   return (
     <div className={classes.root}>
-      <Header setDrawerOpen={() => setDrawerOpen(!drawerOpen)} />
+      <Header setDrawerOpen={handleDrawer} />
       <Sidebar open={drawerOpen} toggleDarkMode={props.toggleDarkMode} />
-      <Dashboard />
+      <Dashboard isDrawerOpen={drawerOpen} />
     </div>
   );
 };

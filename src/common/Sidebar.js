@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "20px",
     width: 240,
     flexShrink: 0,
+    width: "260px",
+    transition: "width 0.3s ease",
   },
   list: {
     marginTop: "35px !important",
@@ -62,7 +64,6 @@ const Sidebar = (props) => {
     {
       title: `${theme.palette.mode === "dark" ? "Light Theme" : "Dark Theme"}`,
       onClick: () => props.toggleDarkMode(),
-      // icon: theme.palette.mode === "dark" ? darkTheme : lightTheme,
       icon: lightTheme,
     },
   ];
@@ -74,7 +75,6 @@ const Sidebar = (props) => {
       classes={{ paper: classes.drawer }}
       PaperProps={{ sx: { backgroundImage: "none" } }}
       ModalProps={{
-        disableBackdropClick: true,
         hideBackdrop: true,
         disableScrollLock: true,
       }}
