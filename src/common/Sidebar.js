@@ -69,15 +69,16 @@ const Sidebar = (props) => {
   ];
   return (
     <Drawer
-      variant="temporary"
+      variant="persistent"
       anchor="left"
       open={open}
       classes={{ paper: classes.drawer }}
-      PaperProps={{ sx: { backgroundImage: "none" } }}
-      ModalProps={{
-        hideBackdrop: true,
-        disableScrollLock: true,
-      }}
+      // PaperProps={{ sx: { backgroundImage: "none" } }}
+      BackdropProps={{ invisible: true }}
+      // ModalProps={{
+      //   hideBackdrop: true,
+      //   disableScrollLock: true,
+      // }}
     >
       <List className={classes.list}>
         {drawerList.map((list) => {
